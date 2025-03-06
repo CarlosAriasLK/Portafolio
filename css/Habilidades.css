@@ -238,22 +238,22 @@ section {
 
 @keyframes progreso1 {
     to {
-        transform: translateX(25%);
+        transform: translateX(30%);
     }
 }
 @keyframes progreso2 {
     to {
-        transform: translateX(-20%);
+        transform: translateX(-10%);
     }
 }
 @keyframes progreso3 {
     to {
-        transform: translateX(-25%);
+        transform: translateX(5%);
     }
 }
 @keyframes progreso4 {
     to {
-        transform: translateX(10%);
+        transform: translateX(25%);
     }
 }
 
