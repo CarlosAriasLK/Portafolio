@@ -81,9 +81,3 @@ Para personalizar el contenido del portafolio:
 - `npm run build` - Compila la aplicación para producción
 - `npm start` - Ejecuta la versión de producción
 - `npm run lint` - Ejecuta el linter
-
-## 🚀 Despliegue
-
-El proyecto está listo para ser desplegado en [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Para más detalles sobre el despliegue, consulta la [documentación de Next.js](https://nextjs.org/docs/app/building-your-application/deploying).
