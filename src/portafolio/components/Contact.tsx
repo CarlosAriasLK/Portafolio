@@ -26,11 +26,12 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
     const api = axios.create({ baseURL: '/api',});
-    const response = await api.post('/send', { name, from: email, message });
+    const response = await api.post('/send', { name, message, email });
 
     if ( response.data.error ) {
       setLoading(false);
       toast.error('Error al enviar el mensaje. Inténtalo de nuevo más tarde.');
+      return;
     }
 
     setLoading(false);

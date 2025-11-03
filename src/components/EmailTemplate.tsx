@@ -1,9 +1,10 @@
 interface EmailTemplateProps {
     name: string
-    message: string
+    message: string,
+    email: string
 }
 
-export const EmailTemplate = ({ name, message }: EmailTemplateProps) => {
+export const EmailTemplate = ({ name, message, email }: EmailTemplateProps) => {
     return (
         <div style={{minHeight: '100vh', backgroundColor: '#f9fafb', padding: '32px 16px', fontFamily: 'Arial,Helvetica,sans-serif', margin: 0}}>
             <div style={{maxWidth: '672px', margin: '0 auto', background: '#ffffff', borderRadius: '16px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', overflow: 'hidden'}}>
@@ -11,7 +12,7 @@ export const EmailTemplate = ({ name, message }: EmailTemplateProps) => {
 
                     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px'}}>
                         <div>
-                            <h1 style={{fontSize: '18px', fontWeight: '600', color: '#111827', margin: 0}}>Mensaje nuevo de { name }</h1>
+                            <h1 style={{fontSize: '18px', fontWeight: '600', color: '#111827', margin: 0}}>Mensaje nuevo de <span style={{fontWeight: 500, color: '#1f2937', textDecoration: 'none'}}>{ email }</span></h1>
                             <p style={{color: '#6b7280', fontSize: '14px', margin: '4px 0 0'}}>A continuación tienes el mensaje.</p>
                         </div>
                     </div>

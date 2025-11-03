@@ -7,9 +7,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
 
     try {
-        const { name, message } = await request.json();
+        const { name, message, email } = await request.json();
 
-        if( !name || !message ) {
+        if( !name || !message || !email ) {
             return Response.json({ error: 'Campos obligatorios', status: 400 });
         }
 
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
             from: `Portafolio <${process.env.RESEND_FROM_EMAIL}>`,
             to: 'ceau922@gmail.com',
             subject: 'Nuevo mensaje de ' + name,
-            react: EmailTemplate({ name, message }),
+            react: EmailTemplate({ name, message, email }),
         });
 
         if (error) {
