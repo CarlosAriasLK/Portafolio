@@ -7,7 +7,6 @@ import { ArrowDown } from 'lucide-react';
 
 export default function Hero() {
     const [isScrolled, setIsScrolled] = useState(false);
-    const { scrollY } = useScroll();
 
     useEffect(() => {
         const updateScroll = () => {

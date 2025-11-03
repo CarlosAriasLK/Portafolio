@@ -17,9 +17,9 @@ const socialLinks = [
 
 export default function Contact() {
 
-  const [name, setName] = useState<string>('carlos');
-  const [email, setEmail] = useState<string>('ceau922@gmail.com');
-  const [message, setMessage] = useState<string>('asda');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
