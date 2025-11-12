@@ -2,6 +2,8 @@
 
 Un portafolio moderno y profesional desarrollado con las últimas tecnologías web.
 
+Abre [carlosarias.me](http://www.carlosarias.me) en el navegador para verlo.
+
 ## 🚀 Tecnologías
 
 - **Next.js 15** - Framework React con App Router
@@ -20,24 +22,6 @@ Un portafolio moderno y profesional desarrollado con las últimas tecnologías w
 - ✅ Optimizado para SEO
 - ✅ Rendimiento optimizado
 - ✅ Modo oscuro compatible
-
-## 📦 Instalación y Uso
-
-```bash
-# Instalar dependencias
-npm install
-
-# Ejecutar en modo desarrollo
-npm run dev
-
-# Compilar para producción
-npm run build
-
-# Ejecutar versión de producción
-npm start
-```
-
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
 ## 🛠️ Estructura del Proyecto
 
