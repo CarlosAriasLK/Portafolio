@@ -2,6 +2,8 @@
 
 Un portafolio moderno y profesional desarrollado con las últimas tecnologías web.
 
+Abre [carlosarias.me](http://www.carlosarias.me) en el navegador para verlo.
+
 ## 🚀 Tecnologías
 
 - **Next.js 15** - Framework React con App Router
@@ -20,24 +22,6 @@ Un portafolio moderno y profesional desarrollado con las últimas tecnologías w
 - ✅ Optimizado para SEO
 - ✅ Rendimiento optimizado
 - ✅ Modo oscuro compatible
-
-## 📦 Instalación y Uso
-
-```bash
-# Instalar dependencias
-npm install
-
-# Ejecutar en modo desarrollo
-npm run dev
-
-# Compilar para producción
-npm run build
-
-# Ejecutar versión de producción
-npm start
-```
-
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
 ## 🛠️ Estructura del Proyecto
 
@@ -59,25 +43,3 @@ portafolio-carlosarias/
 ├── public/               # Archivos estáticos
 └── ...archivos de config
 ```
-
-## 🎨 Personalización
-
-### Colores y Tema
-
-Los colores se pueden personalizar en `src/app/globals.css` modificando las variables CSS.
-
-### Contenido
-
-Para personalizar el contenido del portafolio:
-
-1. **Hero**: Edita `src/components/Hero.tsx` para cambiar tu nombre y descripción
-2. **Proyectos**: Modifica el array `projects` en `src/components/Projects.tsx`
-3. **Habilidades**: Actualiza el array `skills` en `src/components/Skills.tsx`
-4. **Contacto**: Edita los enlaces sociales en `src/components/Contact.tsx`
-
-## 📝 Scripts disponibles
-
-- `npm run dev` - Inicia el servidor de desarrollo
-- `npm run build` - Compila la aplicación para producción
-- `npm start` - Ejecuta la versión de producción
-- `npm run lint` - Ejecuta el linter
