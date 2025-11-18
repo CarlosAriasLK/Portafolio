@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from '@/components';
 import { ArrowDown } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Hero() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -51,9 +52,11 @@ export default function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.01 }}
             >
-                <button className='cursor-pointer'>
-                    Descargar CV
-                </button>
+                <Link href='/cv/CV-CarlosArias.pdf' target='_blank'>
+                    <button className='cursor-pointer'>
+                        Descargar CV
+                    </button>
+                </Link>
             </motion.div>
 
             <motion.div
