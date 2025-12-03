@@ -116,7 +116,7 @@ export default function Skills() {
                         style={{ color: tech.color }}
                       />
 
-                      <motion.div
+                      {/* <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         whileHover={{ opacity: 1, y: 0 }}
                         className="absolute top-full mt-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-card border border-border px-4 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -126,7 +126,7 @@ export default function Skills() {
                           className="absolute bottom-full left-1/2 -translate-x-1/2 w-0 h-0 border-8 border-transparent"
                           style={{ borderBottomColor: 'hsl(var(--border))' }}
                         />
-                      </motion.div>
+                      </motion.div> */}
                       
                     </motion.div>
                   </motion.div>
@@ -169,7 +169,7 @@ export default function Skills() {
                         style={{ color: tech.color }}
                       />
 
-                      <motion.div
+                      {/* <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         whileHover={{ opacity: 1, y: 0 }}
                         className="absolute top-full mt-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-card border border-border px-4 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -179,7 +179,7 @@ export default function Skills() {
                           className="absolute bottom-full left-1/2 -translate-x-1/2 w-0 h-0 border-8 border-transparent"
                           style={{ borderBottomColor: 'hsl(var(--border))' }}
                         />
-                      </motion.div>
+                      </motion.div> */}
                     </motion.div>
                   </motion.div>
                 );
@@ -221,7 +221,7 @@ export default function Skills() {
                         style={{ color: tech.color }}
                       />
 
-                      <motion.div
+                      {/* <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         whileHover={{ opacity: 1, y: 0 }}
                         className="absolute top-full mt-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-card border border-border px-4 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -231,7 +231,7 @@ export default function Skills() {
                           className="absolute bottom-full left-1/2 -translate-x-1/2 w-0 h-0 border-8 border-transparent"
                           style={{ borderBottomColor: 'hsl(var(--border))' }}
                         />
-                      </motion.div>
+                      </motion.div> */}
                     </motion.div>
                   </motion.div>
                 );
