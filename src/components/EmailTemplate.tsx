@@ -26,7 +26,7 @@ export const EmailTemplate = ({ name, message, email }: EmailTemplateProps) => {
                     </div>
 
                     <div style={{marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #e5e7eb', textAlign: 'center', color: '#6b7280', fontSize: '14px'}}>
-                        © 2025 Carlos Arias. Todos los derechos reservados.
+                        © 2025 Carlos Arias.
                     </div>
 
                 </div>
