@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "title": "Carlos Arias | Developer",
+    "description": "Carlos Arias Portfolio - Full Stack Developer specialized in React, Next.js, TypeScript and Node.js"
+  },
+  "hero": {
+    "downloadCV": "Download CV",
+    "greeting": "Carlos Arias",
+    "role": "Software Developer",
+    "description": "Creating modern web experiences with the latest technologies. Specialized in Next.js, React, Flutter and Node.js.",
+    "viewProjects": "View Projects",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Learn more about my experience and skills"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A selection of my recent work and featured projects.",
+    "code": "Code",
+    "demo": "Demo"
+  },
+  "skills": {
+    "title": "Skills",
+    "description": "Technologies and tools I work with regularly."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Have a project in mind? Let's talk!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Error sending message"
+  }
+}

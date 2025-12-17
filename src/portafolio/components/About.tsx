@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components';
 import { Code2, Palette, Rocket, Zap, Heart, Trophy } from 'lucide-react';
+import { Dictionary } from '@/dictionaries/types';
 
 const features = [
     {
@@ -49,15 +50,9 @@ const features = [
     },
 ];
 
-export default function About() {
+export default function About({ dict }: { dict: Dictionary }) {
     return (
         <section id="about" className="py-20 relative overflow-hidden">
-            {/* Fondo animado con formas geométricas */}
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
-                <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-500" />
-            </div>
 
             <div className="container px-4 mx-auto">
                 <motion.div
@@ -76,11 +71,11 @@ export default function About() {
                     >
                     </motion.div>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-foreground via-primary to-foreground">
-                        Sobre Mí
+                        {dict.about.title}
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Desarrollador apasionado por crear soluciones web innovadoras y eficientes.
-                        Con experiencia en múltiples tecnologías y frameworks modernos.
+                        {/* Desarrollador disciplinado que busca entornos donde su conocimiento, habilidades y eficiencia pueda ponerse a prueba.  */}
+                        {dict.about.description}
                     </p>
                 </motion.div>
 
@@ -90,11 +85,11 @@ export default function About() {
                             key={feature.title}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ duration: 0.1 }}
                             viewport={{ once: true }}
-                            whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                            whileHover={{ y: -8, transition: { duration: 0.1 } }}
                         >
-                            <Card className={`h-full group relative overflow-hidden border-2 hover:border-primary/50 transition-all duration-300`}>
+                            <Card className={`h-full group relative overflow-hidden hover:border-primary/50 transition-all duration-300 shadow-lg`}>
 
                                 {/* Gradiente de fondo */}
                                 <div className={`absolute inset-0 bg-linear-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />

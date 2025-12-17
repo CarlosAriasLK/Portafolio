@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Dictionary } from '@/dictionaries/types';
 
 type Project = {
     title: string;
@@ -22,7 +23,7 @@ type Project = {
     repository: string;
 };
 
-// NOTA: Actualiza las rutas de imágenes según tus archivos reales dentro de /public/projects/<proyecto>/
+
 const projects: Project[] = [
     {
         title: 'Journal App',
@@ -124,7 +125,7 @@ const projects: Project[] = [
 
 ];
 
-// Carrusel de imágenes sencillo por tarjeta
+
 function ImageSlider({ images, alt }: { images: string[]; alt: string }) {
     const [index, setIndex] = useState(0);
 
@@ -185,7 +186,7 @@ function ImageSlider({ images, alt }: { images: string[]; alt: string }) {
                         <button
                             key={i}
                             onClick={(e) => { e.stopPropagation(); setIndex(i); }}
-                            className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-white' : 'w-2 bg-white/60'}`}
+                            className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-black' : 'w-2 bg-black/20'}`}
                             aria-label={`Imagen ${i + 1}`}
                         />
                     ))}
@@ -195,15 +196,10 @@ function ImageSlider({ images, alt }: { images: string[]; alt: string }) {
     );
 }
 
-export default function Projects() {
+export default function Projects({ dict }: { dict: Dictionary }) {
     
     return (
         <section id="projects" className="py-20 relative overflow-hidden">
-            
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-2 right-2 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-            </div>
 
             <div className="container px-4 mx-auto">
                 <motion.div
@@ -222,10 +218,10 @@ export default function Projects() {
                     >
                     </motion.div>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-foreground via-primary to-foreground">
-                        Proyectos
+                        {dict.projects.title}
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Una selección de mis trabajos recientes y proyectos destacados.
+                        {dict.projects.description}
                     </p>
                 </motion.div>
 
@@ -235,20 +231,18 @@ export default function Projects() {
                             key={project.title}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ duration: 0.3 }}
                             viewport={{ once: true }}
                         >
                             <motion.div
                                 whileHover={{ y: -8, scale: 1.02 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <Card className="h-full flex flex-col overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 group relative">
-                                    {/* Resplandor al hover */}
+                                <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 group relative shadow-lg">
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                         <div className={`absolute inset-0 bg-linear-to-br`} />
                                     </div>
 
-                                    {/* Header con slider de imágenes */}
                                     <div className={`relative overflow-hidden`}>
                                         <ImageSlider images={project.images} alt={project.title} />
                                     </div>
@@ -286,7 +280,7 @@ export default function Projects() {
                                         >
                                             <Link href={project.repository} target="_blank" rel="noopener noreferrer" className='flex w-full flex-row items-center justify-center'>
                                                 <Github className="w-4 h-4 mr-2" />
-                                                Código
+                                                {dict.projects.code}
                                             </Link>
                                         </Button>
                                     </CardFooter>

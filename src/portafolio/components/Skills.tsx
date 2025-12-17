@@ -1,27 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  SiNextdotjs,
-  SiReact,
-  SiTypescript,
-  SiTailwindcss,
-  SiFramer,
-  SiRedux,
-  SiNodedotjs,
-  SiExpress,
-  SiPostgresql,
-  SiMysql,
-  SiMongodb,
-  SiSequelize,
-  SiFlutter,
-  SiDart,
-  SiGit,
-  SiDocker,
-  SiJavascript
-} from 'react-icons/si';
+import { SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiRedux, SiNodedotjs, SiExpress, SiPostgresql, SiMysql, SiMongodb, SiSequelize, SiFlutter, SiDart, SiGit, SiDocker, SiJavascript } from 'react-icons/si';
 import { TbBrandFramerMotion } from 'react-icons/tb';
 import { FaJava } from 'react-icons/fa';
+import { Dictionary } from '@/dictionaries/types';
 
 const technologies = {
   // Frameworks
@@ -56,7 +39,7 @@ const technologies = {
 };
 
 
-export default function Skills() {
+export default function Skills({ dict }: { dict: Dictionary }) {
   return (
     <section id="skills" className="py-20 relative overflow-hidden">
 
@@ -69,10 +52,10 @@ export default function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-foreground via-primary to-foreground">
-            Habilidades
+            {dict.skills.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tecnologías y herramientas con las que trabajo regularmente.
+            {dict.skills.description}
           </p>
         </motion.div>
 
@@ -99,7 +82,6 @@ export default function Skills() {
                     key={`col1-${index}`}
                     className="group relative shrink-0"
                     whileHover={{ scale: 1.15, zIndex: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     <motion.div
                       className="relative p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
@@ -152,7 +134,6 @@ export default function Skills() {
                     key={`col2-${index}`}
                     className="group relative shrink-0"
                     whileHover={{ scale: 1.15, zIndex: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     <motion.div
                       className="relative p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
@@ -204,7 +185,6 @@ export default function Skills() {
                     key={`col3-${index}`}
                     className="group relative shrink-0"
                     whileHover={{ scale: 1.15, zIndex: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                   >
                     <motion.div
                       className="relative p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"

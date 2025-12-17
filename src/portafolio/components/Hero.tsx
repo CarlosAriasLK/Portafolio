@@ -3,10 +3,14 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Moon, Sun } from 'lucide-react';
 import Link from 'next/link';
+import { Dictionary } from '@/dictionaries/types';
+import {LanguageSwitcher} from '@/components/LanguageSwitcher';
 
-export default function Hero() {
+
+export default function Hero({ dict, lang }: { dict: Dictionary; lang: 'es' | 'en' }) {
+    const [isDark, setIsDark] = useState<boolean>(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -44,19 +48,43 @@ export default function Hero() {
         }
     };
 
+    const toggleTheme = () => {
+        setIsDark(!isDark)
+        document.documentElement.classList.toggle("dark")
+    }
+
     return (
         <>
             <motion.div
-                className='fixed top-6 right-6 bg-linear-to-r from-cyan-600 via-cyan-400 to-cyan-500 hover:from-cyan-500 hover:via-cyan-500 hover:to-cyan-400 cursor-pointer text-white font-semibold p-2 rounded-lg z-50 shadow-lg hover:shadow-cyan-500/50 transition-all duration-300'
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.01 }}
+                className='flex flex-row fixed top-6 right-3 items-center justify-between z-50 w-[270px]'
             >
-                <Link href='/cv/CV-CarlosArias.pdf' target='_blank'>
-                    <button className='cursor-pointer'>
-                        Descargar CV
+
+                <motion.div
+                    className='flex items-center'
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.01 }}
+                >
+                    <button className='cursor-pointer' onClick={toggleTheme}>
+                        {isDark ? <Sun /> : <Moon />}
                     </button>
-                </Link>
+                </motion.div>
+
+                <LanguageSwitcher/>
+
+                <motion.div
+                    className='bg-linear-to-r from-cyan-600 via-cyan-400 to-cyan-500 hover:from-cyan-500 hover:via-cyan-500 hover:to-cyan-400 cursor-pointer text-white font-semibold p-2 rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300'
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.01 }}
+                >
+                    <Link href='/cv/CV-CarlosArias.pdf' target='_blank'>
+                        <button className='cursor-pointer'>
+                            {dict.hero.downloadCV}
+                        </button>
+                    </Link>
+                </motion.div>
+
             </motion.div>
 
             <motion.div
@@ -103,7 +131,6 @@ export default function Hero() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        {/* Nombre en el Hero (siempre visible) */}
                         <motion.h1
                             className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/60"
                             initial={{ opacity: 0, scale: 0.5 }}
@@ -119,7 +146,7 @@ export default function Hero() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3, duration: 0.8 }}
                         >
-                            Desarrollador de Software
+                            {dict.hero.role}
                         </motion.p>
 
                         <motion.p
@@ -128,8 +155,8 @@ export default function Hero() {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            Creando experiencias web modernas con las últimas tecnologías.
-                            Especializado en Next.js, React, Flutter y Node.js.
+                            {dict.hero.description}
+
                         </motion.p>
 
                         <motion.div
@@ -138,11 +165,11 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.7, duration: 0.8 }}
                         >
-                            <Button onClick={scrollToProjects} size="lg" className="text-lg cursor-pointer">
-                                Ver Proyectos
+                            <Button onClick={scrollToProjects} size="lg" className="text-lg cursor-pointer shadow-xl">
+                                {dict.hero.viewProjects}
                             </Button>
-                            <Button onClick={scrollToContact} size="lg" variant="outline" className="text-lg cursor-pointer">
-                                Contactar
+                            <Button onClick={scrollToContact} size="lg" variant="outline" className="text-lg cursor-pointer shadow-lg">
+                                {dict.hero.contact}
                             </Button>
                         </motion.div>
                     </motion.div>

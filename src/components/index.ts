@@ -2,7 +2,8 @@
 
 
 export { EmailTemplate } from './EmailTemplate';
-export { default as ScrollToTop } from './ScrollToTop';
+export { ScrollToTop } from './ScrollToTop';
+export { LanguageSwitcher } from './LanguageSwitcher';
 
 export { Toaster } from './ui/sonner';
 export { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './ui/card';

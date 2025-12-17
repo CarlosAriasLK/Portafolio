@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Input, Textarea } from '@/components';
 import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
 import { toast } from "sonner"
+import { Dictionary } from '@/dictionaries/types';
 
 
 const socialLinks = [
@@ -15,7 +16,7 @@ const socialLinks = [
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/carlitos_arias15?igsh=MTlzZm44ajB5NW16aQ==' },
 ];
 
-export default function Contact() {
+export default function Contact({ dict }: { dict: Dictionary }) {
 
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -56,9 +57,10 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Contacto</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{dict.contact.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente? Me encantaría escucharte.
+            {/* ¿Tienes un proyecto en mente? Creemoslo juntos! */}
+            {dict.contact.description}
           </p>
         </motion.div>
 
@@ -71,7 +73,7 @@ export default function Contact() {
           >
             <Card className='h-full'>
               <CardHeader>
-                <CardTitle>Envíame un mensaje</CardTitle>
+                <CardTitle>{dict.contact.send}</CardTitle>
                 <CardDescription>
                   Completa el formulario y te responderé lo antes posible.
                 </CardDescription>
@@ -88,7 +90,7 @@ export default function Contact() {
                     <Textarea placeholder="Tu mensaje" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
                   </div>
                   <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
-                    {loading ? 'Enviando...' : 'Enviar Mensaje'}
+                    {loading ? `${dict.contact.sending}` : `${dict.contact.message}`}
                   </Button>
                 </form>
               </CardContent>
@@ -132,25 +134,6 @@ export default function Contact() {
           </motion.div>
 
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Card className='flex flex-col mt-12 mx-auto max-w'>
-            <CardHeader>
-              <CardTitle>Disponibilidad</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Actualmente disponible para proyectos freelance y oportunidades de colaboración.
-              </p>
-            </CardContent>
-          </Card>
-
-        </motion.div>
 
       </div>
     </section>
