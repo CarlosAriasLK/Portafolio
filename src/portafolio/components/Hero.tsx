@@ -1,212 +1,46 @@
-'use client';
+import type { Dictionary, Locale } from '@/dictionaries/types';
+import Terminal from './Terminal';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components';
-import { ArrowDown, Moon, Sun } from 'lucide-react';
-import Link from 'next/link';
-import { Dictionary } from '@/dictionaries/types';
-import {LanguageSwitcher} from '@/components/LanguageSwitcher';
+type Props = {
+  t: Dictionary;
+  lang: Locale;
+  setLang: (lang: Locale) => void;
+};
 
+export default function Hero({ t, lang, setLang }: Props) {
+  return (
+    <section id="top" className="relative box-border flex min-h-screen flex-col justify-between overflow-hidden px-[clamp(20px,4vw,48px)] pt-[clamp(104px,14vh,140px)] pb-8">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(236,235,230,.045)_1px,transparent_1px)] bg-[length:calc(100%/6)_100%]" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-[10%] -right-[10%] size-[60vw] max-h-[900px] max-w-[900px] rounded-full bg-[radial-gradient(closest-side,oklch(0.88_0.17_128/.07),transparent)]" />
 
-export default function Hero({ dict, lang }: { dict: Dictionary; lang: 'es' | 'en' }) {
-    const [isDark, setIsDark] = useState<boolean>(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+      <div className="relative mx-auto grid w-full max-w-[1440px] flex-1 grid-cols-[repeat(auto-fit,minmax(min(100%,460px),1fr))] items-center gap-[clamp(40px,6vw,96px)]">
+        <div data-hero-name="" className="will-change-[transform,opacity]">
+          <h1 className="m-0 text-[clamp(68px,10.5vw,176px)] leading-[.86] font-bold tracking-[-.055em]">
+            <span className="block overflow-hidden pb-[.04em]"><span data-reveal="80" className="block">Carlos</span></span>
+            <span className="block overflow-hidden pb-[.06em]"><span data-reveal="180" className="block">Arias<span className="text-acc">.</span></span></span>
+          </h1>
+          <p data-reveal="300" className="mt-9 font-mono text-[13px] tracking-[.04em] text-acc uppercase">{t.kicker}</p>
+          <p data-reveal="380" className="mt-4 max-w-[44ch] text-[clamp(18px,1.5vw,21px)] leading-[1.55] text-pretty text-sub">{t.sub}</p>
+          <div data-reveal="460" className="mt-9 flex flex-wrap gap-3">
+            <a href="#projects" className="flex items-center gap-2.5 rounded-full bg-acc px-[22px] py-[15px] text-base font-semibold !text-bg transition-transform duration-300 ease-out-soft hover:-translate-y-0.5">
+              {t.ctaProjects} <span>→</span>
+            </a>
+            <a href="#contact" className="flex items-center gap-2.5 rounded-full border border-edge-2 px-[22px] py-[15px] text-base font-medium transition-colors duration-300 hover:border-ink hover:!text-ink">
+              {t.ctaContact}
+            </a>
+          </div>
+        </div>
 
-    useEffect(() => {
-        const updateScroll = () => {
-            setIsScrolled(window.scrollY > 300);
-        };
+        <div data-hero-term="" className="will-change-transform">
+          <Terminal t={t} lang={lang} setLang={setLang} />
+        </div>
+      </div>
 
-        window.addEventListener('scroll', updateScroll);
-        return () => window.removeEventListener('scroll', updateScroll);
-    }, []);
-
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    const scrollToNextSection = () => {
-        const nextSection = document.getElementById('about');
-        if (nextSection) {
-            nextSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const scrollToProjects = () => {
-        const projectsSection = document.getElementById('projects');
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const scrollToContact = () => {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const toggleTheme = () => {
-        setIsDark(!isDark)
-        document.documentElement.classList.toggle("dark")
-    }
-
-    return (
-        <>
-            <motion.div
-                className='flex flex-row fixed top-6 right-3 items-center justify-between z-50 w-[270px]'
-            >
-
-                <motion.div
-                    className='flex items-center'
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.01 }}
-                >
-                    <button className='cursor-pointer' onClick={toggleTheme}>
-                        {isDark ? <Sun /> : <Moon />}
-                    </button>
-                </motion.div>
-
-                <LanguageSwitcher/>
-
-                <motion.div
-                    className='bg-linear-to-r from-cyan-600 via-cyan-400 to-cyan-500 hover:from-cyan-500 hover:via-cyan-500 hover:to-cyan-400 cursor-pointer text-white font-semibold p-2 rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300'
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.01 }}
-                >
-                    <Link href='/cv/CV-CarlosArias.pdf' target='_blank'>
-                        <button className='cursor-pointer'>
-                            {dict.hero.downloadCV}
-                        </button>
-                    </Link>
-                </motion.div>
-
-            </motion.div>
-
-            <motion.div
-                className="fixed top-6 left-6 z-50 pointer-events-auto"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                    opacity: isScrolled ? 1 : 0,
-                    y: 5,
-                    x: isScrolled ? 0 : -20,
-                }}
-                transition={{
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 15,
-                    mass: 0.8,
-                }}
-            >
-                <motion.button
-                    onClick={scrollToTop}
-                    className="group relative"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <motion.div
-                        className="absolute inset-0 -inset-x-4 -inset-y-2 rounded-xl"
-                        style={{
-                            backdropFilter: 'blur(12px)',
-                            WebkitBackdropFilter: 'blur(12px)',
-                        }}
-                    />
-
-                    <span className="relative text-xl md:text-2xl font-bold bg-clip-text cursor-pointer">
-                        Carlos Arias
-                    </span>
-
-                </motion.button>
-            </motion.div>
-
-
-            <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-linear-to-b from-background to-secondary/20">
-                <div className="container px-4 mx-auto text-center z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <motion.h1
-                            className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/60"
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            Carlos Arias
-                        </motion.h1>
-
-                        <motion.p
-                            className="text-xl md:text-2xl text-muted-foreground mb-8"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3, duration: 0.8 }}
-                        >
-                            {dict.hero.role}
-                        </motion.p>
-
-                        <motion.p
-                            className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5, duration: 0.8 }}
-                        >
-                            {dict.hero.description}
-
-                        </motion.p>
-
-                        <motion.div
-                            className="flex gap-4 justify-center flex-wrap"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.7, duration: 0.8 }}
-                        >
-                            <Button onClick={scrollToProjects} size="lg" className="text-lg cursor-pointer shadow-xl">
-                                {dict.hero.viewProjects}
-                            </Button>
-                            <Button onClick={scrollToContact} size="lg" variant="outline" className="text-lg cursor-pointer shadow-lg">
-                                {dict.hero.contact}
-                            </Button>
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.button
-                        onClick={scrollToNextSection}
-                        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
-                        animate={{ y: [0, 10, 0] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                    >
-                        <ArrowDown className="w-6 h-6 text-muted-foreground" />
-                    </motion.button>
-                </div>
-
-                {/* Animated background elements */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(50)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 bg-primary/20 rounded-full"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                            }}
-                            animate={{
-                                y: [0, -30, 0],
-                                opacity: [0.2, 0.5, 0.2],
-                            }}
-                            transition={{
-                                duration: 3 + Math.random() * 2,
-                                repeat: Infinity,
-                                delay: Math.random() * 2,
-                            }}
-                        />
-                    ))}
-                </div>
-            </section>
-        </>
-    );
+      <div className="relative mx-auto mt-12 flex w-full max-w-[1440px] flex-wrap justify-between gap-3 border-t border-line pt-[18px] font-mono text-xs text-dim">
+        <span>{t.location}</span>
+        <span>↓ {t.scroll}</span>
+        <span>Ikatech Solutions · Antoky</span>
+      </div>
+    </section>
+  );
 }

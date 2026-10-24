@@ -1,295 +1,83 @@
-'use client';
-
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components';
-import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Dictionary } from '@/dictionaries/types';
 
-type Project = {
-    title: string;
-    description: string;
-    tech: string[];
-    icon: string;
-    gradient: string;
-    bgGradient: string;
-    github: string;
-    demo: string;
-    stars: number;
-    views: number;
-    images: string[];
-    repository: string;
+import type { Dictionary, Locale } from '@/dictionaries/types';
+import { L, PROJECTS } from '../content';
+import ProjectMockup from './ProjectMockups';
+import SectionLabel from './SectionLabel';
+
+type Props = {
+  t: Dictionary;
+  lang: Locale;
 };
 
+export default function Projects({ t, lang }: Props) {
 
-const projects: Project[] = [
-    {
-        title: 'Journal App',
-        description: 'Aplicación de notas y diario personal con autenticación y almacenamiento en la nube.',
-        tech: ['React', 'Vite', 'Material UI', 'Firebase', 'Redux Toolkit'],
-        icon: '✅',
-        gradient: 'from-green-500 via-teal-500 to-cyan-500',
-        bgGradient: 'from-green-500/10 to-cyan-500/10',
-        github: '#',
-        demo: '#',
-        stars: 89,
-        views: 1820,
-        images: [
-            '/projects/journal/3.png',
-            '/projects/journal/2.png',
-            '/projects/journal/1.png',
-        ],
-        repository: 'https://github.com/CarlosAriasLK/JournalApp.git',
-    },
-    {
-        title: 'Econova App',
-        description: 'Plataforma para monitoreo ambiental y gestión de recursos naturales.',
-        tech: ['Java', 'Spring Boot', 'Vue', 'PostgresQL', 'Postman'],
-        icon: '🛒',
-        gradient: 'from-blue-500 via-purple-500 to-pink-500',
-        bgGradient: 'from-blue-500/10 to-purple-500/10',
-        github: '#',
-        demo: '#',
-        stars: 128,
-        views: 2450,
-        images: [
-            '/projects/econova/1.png',
-            '/projects/econova/2.png',
-            '/projects/econova/3.png',
-        ],
-        repository: 'https://github.com/CarlosAriasLK/BusinessIntelligence.git',
-    },
-    {
-        title: 'Calendar App',
-        description: 'Aplicación pensada para la colaboración y productividad en equipos de trabajo.',
-        tech: ['React', 'Nodejs', 'Redux Toolkit', 'Shadcn', 'Framer Motion', 'Tailwind CSS', 'MongoDB'],
-        icon: '📱',
-        gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
-        bgGradient: 'from-cyan-500/10 to-indigo-500/10',
-        github: '#',
-        demo: '#',
-        stars: 97,
-        views: 1650,
-        images: [
-            '/projects/calendar/2.png',
-            '/projects/calendar/1.png',
-        ],
-        repository: 'https://github.com/CarlosAriasLK/CalendarApp.git',
-    },
-    {
-        title: 'Ecommerce App',
-        description: 'Ecommerce móvil con catálogo de productos, carrito de compras y pagos simulados.',
-        tech: ['Flutter', 'Dart', 'Riverpod', 'Sqflite'],
-        icon: '🤖',
-        gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
-        bgGradient: 'from-violet-500/10 to-fuchsia-500/10',
-        github: '#',
-        demo: '#',
-        stars: 243,
-        views: 4100,
-        images: [
-            '/projects/ecommerceapp/8.png',
-            '/projects/ecommerceapp/1.png',
-            '/projects/ecommerceapp/2.png',
-            '/projects/ecommerceapp/3.png',
-            '/projects/ecommerceapp/5.png',
-            '/projects/ecommerceapp/6.png',
-            '/projects/ecommerceapp/7.png',
-        ],
-        repository: 'https://github.com/CarlosAriasLK/ECommercePlatzi.git',
-    },
-    {
-        title: 'Cinemapedia App',
-        description: 'Aplicación móvil para explorar películas y series, con detalles y valoraciones.',
-        tech: ['Flutter', 'Dart', 'Riverpod', 'Sqflite'],
-        icon: '🛒',
-        gradient: 'from-blue-500 via-purple-500 to-pink-500',
-        bgGradient: 'from-blue-500/10 to-purple-500/10',
-        github: '#',
-        demo: '#',
-        stars: 128,
-        views: 2450,
-        images: [
-            '/projects/cinemapediaapp/1.png',
-            '/projects/cinemapediaapp/2.png',
-            '/projects/cinemapediaapp/3.png',
-            '/projects/cinemapediaapp/4.png',
-            '/projects/cinemapediaapp/5.png',
-        ],
-        repository: 'https://github.com/CarlosAriasLK/CinemapediaApp.git',
-    },
-    
-    
+  const [open, setOpen] = useState(0);
+  const [hover, setHover] = useState(-1);
 
-];
+  return (
+    <section id="projects" className="mx-auto max-w-[1440px] scroll-mt-[60px] px-[clamp(20px,4vw,48px)] py-[clamp(48px,8vw,120px)]">
+      <SectionLabel n="02" label={t.sProjects} />
+      <div className="mb-[clamp(40px,5vw,72px)] flex flex-wrap items-end justify-between gap-6">
+        <h2 data-drift="1" className="m-0 text-[clamp(56px,10vw,160px)] leading-[.9] font-bold tracking-[-.05em] will-change-transform">{t.projTitle}</h2>
+        <p data-reveal="100" className="m-0 max-w-[34ch] text-[17px] leading-[1.55] text-sub">{t.projIntro}</p>
+      </div>
 
-
-function ImageSlider({ images, alt }: { images: string[]; alt: string }) {
-    const [index, setIndex] = useState(0);
-
-    const hasImages = images && images.length > 0;
-    const safeImages = hasImages ? images : ['/projects/placeholder.jpg'];
-
-    const next = () => setIndex((i) => (i + 1) % safeImages.length);
-    const prev = () => setIndex((i) => (i - 1 + safeImages.length) % safeImages.length);
-
-    return (
-    <div className="relative w-full overflow-hidden bg-black/5 aspect-video md:aspect-4/3">
-            {safeImages.map((src, i) => (
-                <motion.div
-                    key={src + i}
-                    className="absolute inset-0"
-                    initial={false}
-                    animate={{ opacity: i === index ? 1 : 0 }}
-                    transition={{ duration: 0.4 }}
+      <div className="border-t border-line-2">
+        {PROJECTS.map((p, i) => {
+          const isOpen = open === i;
+          const hot = isOpen || hover === i;
+          return (
+            <article key={p.title} className="border-b border-line-2">
+              <button
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                onMouseEnter={() => setHover(i)}
+                onMouseLeave={() => setHover(-1)}
+                aria-expanded={isOpen}
+                className="box-border grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-[clamp(14px,3vw,40px)] py-[clamp(22px,3vw,36px)] text-left"
+              >
+                <span className="font-mono text-[12.5px] text-dim">0{i + 1}</span>
+                <span
+                  className={`text-[clamp(30px,5.6vw,88px)] leading-none font-semibold tracking-[-.04em] transition-[color,translate] duration-[350ms,600ms] ease-out-soft ${
+                    hot ? 'text-ink' : 'text-[#7d7e78]'
+                  } ${hover === i && !isOpen ? 'translate-x-3.5' : 'translate-x-0'}`}
                 >
-                    <Image
-                        src={src}
-                        alt={`${alt} ${i + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-contain"
-                        onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                        }}
-                        priority={i === 0}
-                    />
-                </motion.div>
-            ))}
+                  {p.title}
+                </span>
+                <span className="flex items-center gap-5">
+                  <span className="hidden font-mono text-xs text-muted min-[860px]:inline">{L(p.kind, lang)}</span>
+                  <span
+                    aria-hidden="true"
+                    className={`flex size-11 items-center justify-center rounded-full border border-edge-2 text-xl transition-[rotate,background-color,color] duration-500 ease-out-soft ${
+                      isOpen ? 'rotate-45 bg-acc text-bg' : 'rotate-0 bg-transparent text-ink'
+                    }`}
+                  >
+                    +
+                  </span>
+                </span>
+              </button>
 
-            {/* Controles */}
-            {safeImages.length > 1 && (
-                <div className="absolute inset-0 flex items-center justify-between px-2">
-                    <button
-                        aria-label="Anterior"
-                        onClick={(e) => { e.stopPropagation(); prev(); }}
-                        className="p-1 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors cursor-pointer"
-                    >
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
-                        aria-label="Siguiente"
-                        onClick={(e) => { e.stopPropagation(); next(); }}
-                        className="p-1 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors cursor-pointer"
-                    >
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
+              <div className={`grid transition-[grid-template-rows] duration-700 ease-out-soft ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                <div className="min-h-0 overflow-hidden">
+                  <div className="grid grid-cols-1 gap-[clamp(28px,4vw,72px)] pt-1 pb-[clamp(36px,4vw,60px)] min-[860px]:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+                    <div className="flex flex-col gap-6">
+                      <p className="m-0 max-w-[36ch] text-[clamp(18px,1.6vw,22px)] leading-[1.5] text-pretty text-[#d6d6cf]">{L(p.desc, lang)}</p>
+                      <div>
+                        <div className="mb-2 font-mono text-[11.5px] tracking-[.06em] text-dim uppercase">Stack</div>
+                        <div className="font-mono text-[13px] leading-[1.7] text-sub">{p.tech}</div>
+                      </div>
+                      <a href={p.href} target="_blank" rel="noopener" className="flex gap-2 self-start border-b border-acc pb-1 text-base font-medium">
+                        {p.linkLabel ? L(p.linkLabel, lang) : t.code} ↗
+                      </a>
+                    </div>
+                    <ProjectMockup kind={p.mockup} t={t} />
+                  </div>
                 </div>
-            )}
-
-            {/* Dots */}
-            {safeImages.length > 1 && (
-                <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
-                    {safeImages.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={(e) => { e.stopPropagation(); setIndex(i); }}
-                            className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-black' : 'w-2 bg-black/20'}`}
-                            aria-label={`Imagen ${i + 1}`}
-                        />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-}
-
-export default function Projects({ dict }: { dict: Dictionary }) {
-    
-    return (
-        <section id="projects" className="py-20 relative overflow-hidden">
-
-            <div className="container px-4 mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <motion.div
-                        initial={{ scale: 0, rotate: 180 }}
-                        whileInView={{ scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.6, type: "spring" }}
-                        viewport={{ once: true }}
-                        className="inline-block mb-4"
-                    >
-                    </motion.div>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-foreground via-primary to-foreground">
-                        {dict.projects.title}
-                    </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        {dict.projects.description}
-                    </p>
-                </motion.div>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={project.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3 }}
-                            viewport={{ once: true }}
-                        >
-                            <motion.div
-                                whileHover={{ y: -8, scale: 1.02 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 group relative shadow-lg">
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                        <div className={`absolute inset-0 bg-linear-to-br`} />
-                                    </div>
-
-                                    <div className={`relative overflow-hidden`}>
-                                        <ImageSlider images={project.images} alt={project.title} />
-                                    </div>
-
-                                    <CardHeader className="relative">
-                                        <CardTitle className="group-hover:text-primary transition-colors duration-300">
-                                            {project.title}
-                                        </CardTitle>
-                                        <CardDescription>{project.description}</CardDescription>
-                                    </CardHeader>
-
-                                    <CardContent className="grow relative">
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tech.map((tech, idx) => (
-                                                <motion.span
-                                                    key={tech}
-                                                    initial={{ opacity: 0, scale: 0 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    transition={{ delay: index * 0.1 + idx * 0.05 }}
-                                                    viewport={{ once: true }}
-                                                    className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-full transition-colors duration-200 cursor-default border border-transparent hover:border-primary/30"
-                                                >
-                                                    {tech}
-                                                </motion.span>
-                                            ))}
-                                        </div>
-                                    </CardContent>
-
-                                    <CardFooter className="relative">
-                                        <Button
-                                            asChild
-                                            variant="outline"
-                                            size="sm"
-                                            className="group-hover:border-primary/50 transition-colors duration-300 cursor-pointer w-full"
-                                        >
-                                            <Link href={project.repository} target="_blank" rel="noopener noreferrer" className='flex w-full flex-row items-center justify-center'>
-                                                <Github className="w-4 h-4 mr-2" />
-                                                {dict.projects.code}
-                                            </Link>
-                                        </Button>
-                                    </CardFooter>
-                                </Card>
-                            </motion.div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
 }

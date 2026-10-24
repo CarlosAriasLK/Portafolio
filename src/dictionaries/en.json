@@ -1,39 +1,146 @@
 {
   "metadata": {
-    "title": "Carlos Arias | Developer",
-    "description": "Carlos Arias Portfolio - Full Stack Developer specialized in React, Next.js, TypeScript and Node.js"
+    "title": "Carlos Arias — Full Stack Developer & AI Agents",
+    "description": "Portfolio of Carlos Arias, full stack developer at Ikatech Solutions. React, Next.js, Node, Django and AI agents with LangChain, Deepgram and Cartesia."
   },
-  "hero": {
-    "downloadCV": "Download CV",
-    "greeting": "Carlos Arias",
-    "role": "Software Developer",
-    "description": "Creating modern web experiences with the latest technologies. Specialized in Next.js, React, Flutter and Node.js.",
-    "viewProjects": "View Projects",
-    "contact": "Contact"
+  "nav": [
+    { "id": "about", "n": "01", "label": "About" },
+    { "id": "projects", "n": "02", "label": "Projects" },
+    { "id": "experience", "n": "03", "label": "Journey" },
+    { "id": "stack", "n": "04", "label": "Stack" },
+    { "id": "contact", "n": "05", "label": "Contact" }
+  ],
+  "cv": "Resume",
+  "kicker": "Full Stack Developer — AI Agents",
+  "sub": "I build web products end to end, and AI agents that talk, reason and run real workflows. Developer at Ikatech Solutions and co-founder of Antoky.",
+  "ctaProjects": "View projects",
+  "ctaContact": "Let's talk",
+  "location": "Santa Rosa de Cabal, Colombia",
+  "scroll": "Scroll",
+  "termHint": "Try:",
+  "term": {
+    "whoami": "Carlos Arias — full stack developer @ Ikatech Solutions",
+    "online": "✓ agent online",
+    "hint": "type \"help\" to explore",
+    "commands": "available commands:",
+    "help": {
+      "about": "who I am",
+      "projects": "featured projects",
+      "stack": "tech by layer",
+      "contact": "how to reach me",
+      "lang": "switch to Spanish",
+      "clear": "clear terminal"
+    },
+    "langSet": "language: english",
+    "denied": "permission denied. nice try.",
+    "notFound": "command not found: ",
+    "tryHelp": " — try \"help\""
   },
-  "about": {
-    "title": "About Me",
-    "description": "Learn more about my experience and skills"
+  "sAbout": "about",
+  "sProjects": "projects",
+  "sExp": "journey",
+  "sStack": "stack",
+  "sContact": "contact",
+  "about": "I am a software developer based in Santa Rosa de Cabal, Colombia. I work across the whole cycle: interfaces in React and Next.js, services in Node and Django, and AI agents that combine graphs, vector memory and voice. I care about clear code and experiences that feel considered.",
+  "photoTag": "Full stack · AI · Antoky",
+  "antokyRole": "Co-founder of",
+  "antokyAbout": "Custom software, automation and applied AI for agribusiness and distribution in Colombia.",
+  "facts": [
+    { "k": "Based in", "v": "Santa Rosa de Cabal, CO" },
+    { "k": "Education", "v": "Software Development Technologist — SENA, 2025" },
+    { "k": "Distinction", "v": "Apprentice of excellence" },
+    { "k": "Venture", "v": "Co-founder of Antoky" },
+    { "k": "Languages", "v": "Spanish · English B1+" }
+  ],
+  "projTitle": "Projects",
+  "projIntro": "My company, Antoky, plus a selection of personal and academic projects, from web to mobile.",
+  "code": "View code",
+  "antokyH1": "Clear processes.",
+  "antokyH2": "Companies that scale.",
+  "antokySectors": ["Agribusiness", "Distribution & trade"],
+  "antokySvc": [
+    { "n": "01", "t": "Custom business software" },
+    { "n": "02", "t": "Process automation" },
+    { "n": "03", "t": "Systems integration" },
+    { "n": "04", "t": "Applied artificial intelligence" }
+  ],
+  "slot": {
+    "h1": "Your time.",
+    "h2": "Better managed.",
+    "agenda": "Schedule",
+    "today": "TODAY",
+    "rows": [
+      { "h": "09:00", "n": "Classic cut", "s": "Confirmed" },
+      { "h": "10:30", "n": "Manicure", "s": "WhatsApp" },
+      { "h": "12:00", "n": "Available", "s": "Open" }
+    ],
+    "bot": "Booking agent",
+    "msg1": "Any opening tomorrow at 3 pm?",
+    "msg2": "Yes, 3:00 pm is open. Shall I book it?",
+    "ok": "Booking confirmed"
   },
-  "projects": {
-    "title": "Projects",
-    "description": "A selection of my recent work and featured projects.",
-    "code": "Code",
-    "demo": "Demo"
+  "cal": {
+    "month": "October",
+    "week": ["M", "T", "W", "T", "F", "S", "S"],
+    "events": { "6": "Meeting", "14": "Demo", "22": "Retro", "29": "Delivery" },
+    "new": "New event",
+    "fields": [
+      { "k": "Title", "v": "Client demo" },
+      { "k": "Start", "v": "Oct 14 · 10:00" },
+      { "k": "End", "v": "Oct 14 · 11:00" }
+    ],
+    "save": "Save"
   },
-  "skills": {
-    "title": "Skills",
-    "description": "Technologies and tools I work with regularly."
+  "jr": {
+    "notesLabel": "NOTES · 03",
+    "notes": [
+      { "t": "Trip to Cartagena", "d": "Oct 22" },
+      { "t": "Project ideas", "d": "Oct 18" },
+      { "t": "Today’s tasks", "d": "Oct 15" }
+    ],
+    "date": "Wednesday, Oct 22 2025",
+    "title": "Trip to Cartagena",
+    "body": "Trip memories: sunset at the beach and a walk through the old town.",
+    "save": "Save",
+    "new": "New entry"
   },
-  "contact": {
-    "title": "Contact",
-    "description": "Have a project in mind? Let's talk!",
-    "name": "Name",
-    "email": "Email",
-    "message": "Message",
-    "send": "Send message",
-    "sending": "Sending...",
-    "success": "Message sent successfully!",
-    "error": "Error sending message"
-  }
+  "ec": {
+    "cats": ["Clothes", "Electronics", "Home"],
+    "items": [
+      { "n": "Graphic tee", "p": "$44", "c": "#3a3f47" },
+      { "n": "Red hoodie", "p": "$10", "c": "#8c3a35" },
+      { "n": "Headphones", "p": "$44", "c": "#c9a27a" },
+      { "n": "Lamp", "p": "$53", "c": "#6c7a6a" }
+    ],
+    "cart": "Cart",
+    "cartN": "2 items",
+    "total": "Total",
+    "pay": "Checkout"
+  },
+  "cm": {
+    "now": "Now playing",
+    "soon": "Upcoming",
+    "fav": "Favorites",
+    "trailer": "Trailer",
+    "tabs": ["Home", "Popular", "Favorites"]
+  },
+  "expTitle": "Journey",
+  "expIntro": "Professional experience and education, most recent first.",
+  "stackTitle": "Stack",
+  "stackIntro": "Organized in layers, from interface to agents, plus the AI tools I use every day.",
+  "certLabel": "Certifications —",
+  "certs": "Next.js, Flutter & TypeScript (Udemy) · Shadcn & React Router (DevTalles) · JavaScript & Cybersecurity (Cisco) · Web architecture with Java (TalentoTech) · Cloud, Storage, Generative AI & ML (AWS) · Software quality (SENA)",
+  "contactTitle": "Let's talk.",
+  "contactSub": "Have a project, a role or an idea? Write to me and I will get back to you soon.",
+  "copy": "Copy email",
+  "copied": "Copied ✓",
+  "clickCopy": "click to copy",
+  "fName": "Name",
+  "fMsg": "Message",
+  "send": "Send message",
+  "sending": "Sending…",
+  "sent": "Message sent. Thank you!",
+  "sendError": "Could not send it. Please try again later.",
+  "footer": "Designed and built by Carlos Arias",
+  "top": "Back to top"
 }

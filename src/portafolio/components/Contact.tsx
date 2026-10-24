@@ -1,141 +1,111 @@
-'use client';
-
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
-import { motion } from 'framer-motion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Input, Textarea } from '@/components';
-import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
-import { toast } from "sonner"
-import { Dictionary } from '@/dictionaries/types';
 
+import type { Dictionary } from '@/dictionaries/types';
+import { EMAIL, SOCIALS } from '../content';
+import SectionLabel from './SectionLabel';
 
-const socialLinks = [
-  { icon: Mail, label: 'Email', href: 'mailto:ceau922@gmail.com' },
-  { icon: Github, label: 'GitHub', href: 'https://github.com/CarlosAriasLK' },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/1carlosarias5/' },
-  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/carlitos_arias15?igsh=MTlzZm44ajB5NW16aQ==' },
-];
+const FIELD_LABEL = 'flex flex-col gap-2 font-mono text-[11.5px] tracking-[.06em] text-muted uppercase';
+const FIELD = 'border-0 border-b border-edge-2 bg-transparent py-2 font-sans text-xl tracking-normal text-ink normal-case outline-none transition-colors duration-250 focus:border-acc';
 
-export default function Contact({ dict }: { dict: Dictionary }) {
+type Status = 'idle' | 'sending' | 'sent' | 'error';
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+export default function Contact({ t }: { t: Dictionary }) {
 
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+  const [copied, setCopied] = useState(false);
+  const copyTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const copyEmail = () => {
+    navigator.clipboard?.writeText(EMAIL).catch(() => {});
+    setCopied(true);
+    clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    const api = axios.create({ baseURL: '/api',});
-    const response = await api.post('/send', { name, message, email });
-
-    if ( response.data.error ) {
-      setLoading(false);
-      toast.error('Error al enviar el mensaje. Inténtalo de nuevo más tarde.');
-      return;
+    setStatus('sending');
+    try {
+      const { data } = await axios.post('/api/send', { name, message, email });
+      if (data.error) throw new Error(data.error);
+      setName('');
+      setEmail('');
+      setMessage('');
+      setStatus('sent');
+    } catch {
+      setStatus('error');
     }
-
-    setLoading(false);
-
-    setName('');
-    setEmail('');
-    setMessage('');
-
-    toast.success('Mensaje enviado correctamente!',  {
-      duration: 3000,
-      position: 'top-center',
-    });
   };
 
   return (
-    <section id="contact" className="py-20">
-      <div className="container px-4 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    <section id="contact" className="mx-auto max-w-[1440px] scroll-mt-[60px] px-[clamp(20px,4vw,48px)] pt-[clamp(96px,12vw,180px)] pb-10">
+      <SectionLabel n="05" label={t.sContact} />
+      <h2 data-drift="1" className="m-0 text-[clamp(76px,16vw,260px)] leading-[.85] font-extrabold tracking-[-.06em] will-change-transform">{t.contactTitle}</h2>
+      <p data-reveal="0" className="mt-8 max-w-[46ch] text-[clamp(18px,1.5vw,21px)] leading-[1.55] text-sub">{t.contactSub}</p>
+
+      <div data-reveal="80" className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+        <button
+          onClick={copyEmail}
+          aria-label={t.copy}
+          className="cursor-pointer border-b-2 border-acc pb-1.5 text-[clamp(26px,4.2vw,64px)] font-semibold tracking-[-.035em] transition-colors duration-250 hover:text-acc"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">{dict.contact.title}</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {/* ¿Tienes un proyecto en mente? Creemoslo juntos! */}
-            {dict.contact.description}
-          </p>
-        </motion.div>
+          {EMAIL}
+        </button>
+        <span className={`font-mono text-[12.5px] ${copied ? 'text-acc' : 'text-dim'}`}>{copied ? t.copied : t.clickCopy}</span>
+      </div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Card className='h-full'>
-              <CardHeader>
-                <CardTitle>{dict.contact.send}</CardTitle>
-                <CardDescription>
-                  Completa el formulario y te responderé lo antes posible.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div>
-                    <Input placeholder="Tu nombre" value={name} onChange={(e) => setName(e.target.value)} />
-                  </div>
-                  <div>
-                    <Input type="email" placeholder="Tu email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                  </div>
-                  <div>
-                    <Textarea placeholder="Tu mensaje" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
-                  </div>
-                  <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
-                    {loading ? `${dict.contact.sending}` : `${dict.contact.message}`}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <Card className='h-full'>
-              <CardHeader>
-                <CardTitle>Conecta conmigo</CardTitle>
-                <CardDescription>
-                  Encuentra mis perfiles en las redes sociales.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {socialLinks.map((link, index) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary transition-colors"
-                    whileHover={{ x: 5 }}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <link.icon className="w-5 h-5 text-primary" />
-                    <span className="font-medium">{link.label}</span>
-                  </motion.a>
-                ))}
-              </CardContent>
-            </Card>
-          </motion.div>
-
+      <div className="mt-[clamp(64px,8vw,120px)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-[clamp(48px,6vw,96px)]">
+        <div data-reveal="0" className="border-t border-line-2">
+          {SOCIALS.map(s => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener"
+              className="flex items-center justify-between border-b border-line-2 py-[22px] text-[clamp(22px,2.2vw,30px)] font-medium tracking-[-.02em] transition-[padding,color] duration-400 ease-out-soft hover:pl-3.5"
+            >
+              <span>{s.label}</span>
+              <span className="font-mono text-[12.5px] text-muted">{s.handle} ↗</span>
+            </a>
+          ))}
         </div>
 
+        <form data-reveal="120" onSubmit={handleSubmit} className="flex flex-col gap-7">
+          <label className={FIELD_LABEL}>
+            {t.fName}
+            <input required value={name} onChange={e => setName(e.target.value)} className={FIELD} />
+          </label>
+          <label className={FIELD_LABEL}>
+            Email
+            <input required type="email" value={email} onChange={e => setEmail(e.target.value)} className={FIELD} />
+          </label>
+          <label className={FIELD_LABEL}>
+            {t.fMsg}
+            <textarea required rows={4} value={message} onChange={e => setMessage(e.target.value)} className={`${FIELD} resize-y`} />
+          </label>
+          <div className="flex flex-wrap items-center gap-5">
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              className="cursor-pointer rounded-full bg-ink px-6 py-[15px] text-base font-semibold text-bg transition-colors duration-250 hover:bg-acc disabled:cursor-wait"
+            >
+              {status === 'sending' ? t.sending : t.send} →
+            </button>
+            {status === 'sent' && <span role="status" className="font-mono text-[12.5px] text-acc">{t.sent}</span>}
+            {status === 'error' && <span role="alert" className="font-mono text-[12.5px] text-[#e0866a]">{t.sendError}</span>}
+          </div>
+        </form>
       </div>
+
+      <footer className="mt-[clamp(96px,12vw,180px)] flex flex-wrap justify-between gap-3 border-t border-line pt-5 font-mono text-xs text-dim">
+        <span>© 2026 Carlos Arias</span>
+        <span>{t.footer}</span>
+        <a href="#top" className="!text-muted hover:!text-acc">{t.top} ↑</a>
+      </footer>
     </section>
   );
 }

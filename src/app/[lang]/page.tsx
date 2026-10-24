@@ -1,20 +1,12 @@
-import { About, Contact, Hero, Projects, Skills } from '@/portafolio';
-import { ScrollToTop } from '@/components';
+import { Portfolio } from '@/portafolio';
 import { getDictionary } from '@/dictionaries';
+import type { Locale } from '@/dictionaries/types';
 
-export default async function Home({ params, }: { params: { lang: 'es' | 'en' }; }) {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
 
-    const paramsValues = await params;
-    const dict = await getDictionary(paramsValues.lang);
+    const lang = (await params).lang as Locale;
+    // Se cargan ambos idiomas para poder cambiar en el cliente sin recargar (ej. comando "lang" de la terminal)
+    const [es, en] = await Promise.all([getDictionary('es'), getDictionary('en')]);
 
-    return (
-        <main className="min-h-screen">
-            <Hero dict={dict} lang={paramsValues.lang} />
-            <About dict={dict} />
-            <Projects dict={dict} />
-            <Skills dict={dict} />
-            <Contact dict={dict} />
-            <ScrollToTop />
-        </main>
-    );
+    return <Portfolio initialLang={lang} dicts={{ es, en }} />;
 }

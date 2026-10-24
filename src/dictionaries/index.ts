@@ -1,10 +1,10 @@
-'use server'
+import type { Dictionary, Locale } from './types';
 
 const dictionaries = {
   es: () => import('./es.json').then((module) => module.default),
   en: () => import('./en.json').then((module) => module.default),
 };
 
-export const getDictionary = async (locale: 'es' | 'en') => {
+export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
   return dictionaries[locale]();
 };

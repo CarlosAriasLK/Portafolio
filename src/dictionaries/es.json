@@ -1,39 +1,146 @@
 {
   "metadata": {
-    "title": "Carlos Arias | Desarrollador",
-    "description": "Portafolio de Carlos Arias - Desarrollador Full Stack especializado en React, Next.js, TypeScript y Node.js"
+    "title": "Carlos Arias — Desarrollador Full Stack & Agentes de IA",
+    "description": "Portafolio de Carlos Arias, desarrollador full stack en Ikatech Solutions. React, Next.js, Node, Django y agentes de IA con LangChain, Deepgram y Cartesia."
   },
-  "hero": {
-    "downloadCV": "Descargar CV",
-    "greeting": "Carlos Arias",
-    "role": "Desarrollador de Software",
-    "description": "Creando experiencias web modernas con las últimas tecnologías. Especializado en Next.js, React, Flutter y Node.js.",
-    "viewProjects": "Ver Proyectos",
-    "contact": "Contactar"
+  "nav": [
+    { "id": "about", "n": "01", "label": "Sobre mí" },
+    { "id": "projects", "n": "02", "label": "Proyectos" },
+    { "id": "experience", "n": "03", "label": "Trayectoria" },
+    { "id": "stack", "n": "04", "label": "Stack" },
+    { "id": "contact", "n": "05", "label": "Contacto" }
+  ],
+  "cv": "CV",
+  "kicker": "Desarrollador Full Stack — Agentes de IA",
+  "sub": "Construyo productos web de principio a fin y agentes de IA que conversan, razonan y ejecutan flujos reales. Desarrollador en Ikatech Solutions y cofundador de Antoky.",
+  "ctaProjects": "Ver proyectos",
+  "ctaContact": "Hablemos",
+  "location": "Santa Rosa de Cabal, Colombia",
+  "scroll": "Desplázate",
+  "termHint": "Prueba:",
+  "term": {
+    "whoami": "Carlos Arias — desarrollador full stack @ Ikatech Solutions",
+    "online": "✓ agente en línea",
+    "hint": "escribe \"help\" para explorar",
+    "commands": "comandos disponibles:",
+    "help": {
+      "about": "quién soy",
+      "projects": "proyectos destacados",
+      "stack": "tecnologías por capa",
+      "contact": "cómo encontrarme",
+      "lang": "cambiar a inglés",
+      "clear": "limpiar terminal"
+    },
+    "langSet": "idioma: español",
+    "denied": "permiso denegado. buen intento.",
+    "notFound": "comando no encontrado: ",
+    "tryHelp": " — prueba \"help\""
   },
-  "about": {
-    "title": "Sobre Mí",
-    "description": "Conoce más sobre mi experiencia y habilidades"
+  "sAbout": "sobre mí",
+  "sProjects": "proyectos",
+  "sExp": "trayectoria",
+  "sStack": "stack",
+  "sContact": "contacto",
+  "about": "Soy desarrollador de software en Santa Rosa de Cabal, Colombia. Trabajo en todo el ciclo: interfaces en React y Next.js, servicios en Node y Django, y agentes de IA que combinan grafos, memoria vectorial y voz. Me importa que el código sea claro y que la experiencia se sienta cuidada.",
+  "photoTag": "Full stack · IA · Antoky",
+  "antokyRole": "Cofundador de",
+  "antokyAbout": "Software a medida, automatización e IA aplicada para la agroindustria y la distribución en Colombia.",
+  "facts": [
+    { "k": "Base", "v": "Santa Rosa de Cabal, CO" },
+    { "k": "Formación", "v": "Tecnólogo ADSO — SENA, 2025" },
+    { "k": "Distinción", "v": "Aprendiz en excelencia" },
+    { "k": "Emprendimiento", "v": "Cofundador de Antoky" },
+    { "k": "Idiomas", "v": "Español · Inglés B1+" }
+  ],
+  "projTitle": "Proyectos",
+  "projIntro": "Mi empresa, Antoky, y una selección de proyectos personales y académicos, de la web al móvil.",
+  "code": "Ver código",
+  "antokyH1": "Procesos claros.",
+  "antokyH2": "Empresas que escalan.",
+  "antokySectors": ["Agroindustria", "Distribución y comercialización"],
+  "antokySvc": [
+    { "n": "01", "t": "Software empresarial a medida" },
+    { "n": "02", "t": "Automatización de procesos" },
+    { "n": "03", "t": "Integración de sistemas" },
+    { "n": "04", "t": "Inteligencia artificial aplicada" }
+  ],
+  "slot": {
+    "h1": "Tu tiempo.",
+    "h2": "Mejor gestionado.",
+    "agenda": "Agenda",
+    "today": "HOY",
+    "rows": [
+      { "h": "09:00", "n": "Corte clásico", "s": "Confirmada" },
+      { "h": "10:30", "n": "Manicure", "s": "WhatsApp" },
+      { "h": "12:00", "n": "Disponible", "s": "Libre" }
+    ],
+    "bot": "Agente de reservas",
+    "msg1": "¿Hay cupo mañana a las 3 pm?",
+    "msg2": "Sí, hay cupo a las 3:00 pm. ¿Te lo reservo?",
+    "ok": "Reserva confirmada"
   },
-  "projects": {
-    "title": "Proyectos",
-    "description": "Una selección de mis trabajos recientes y proyectos destacados.",
-    "code": "Código",
-    "demo": "Demo"
+  "cal": {
+    "month": "Octubre",
+    "week": ["L", "M", "X", "J", "V", "S", "D"],
+    "events": { "6": "Reunión", "14": "Demo", "22": "Retro", "29": "Entrega" },
+    "new": "Nuevo evento",
+    "fields": [
+      { "k": "Título", "v": "Demo con cliente" },
+      { "k": "Inicio", "v": "14 oct · 10:00" },
+      { "k": "Fin", "v": "14 oct · 11:00" }
+    ],
+    "save": "Guardar"
   },
-  "skills": {
-    "title": "Habilidades",
-    "description": "Tecnologías y herramientas con las que trabajo regularmente."
+  "jr": {
+    "notesLabel": "NOTAS · 03",
+    "notes": [
+      { "t": "Viaje a Cartagena", "d": "22 oct" },
+      { "t": "Ideas de proyecto", "d": "18 oct" },
+      { "t": "Tareas del día", "d": "15 oct" }
+    ],
+    "date": "Miércoles, 22 oct 2025",
+    "title": "Viaje a Cartagena",
+    "body": "Recuerdos del viaje: atardecer en la playa y paseo por el centro histórico.",
+    "save": "Guardar",
+    "new": "Nueva entrada"
   },
-  "contact": {
-    "title": "Contacto",
-    "description": "¿Tienes un proyecto en mente? ¡Hablemos!",
-    "name": "Nombre",
-    "email": "Email",
-    "message": "Mensaje",
-    "send": "Enviar mensaje",
-    "sending": "Enviando...",
-    "success": "¡Mensaje enviado con éxito!",
-    "error": "Error al enviar el mensaje"
-  }
+  "ec": {
+    "cats": ["Ropa", "Electrónica", "Hogar"],
+    "items": [
+      { "n": "Camiseta gráfica", "p": "$44", "c": "#3a3f47" },
+      { "n": "Hoodie rojo", "p": "$10", "c": "#8c3a35" },
+      { "n": "Audífonos", "p": "$44", "c": "#c9a27a" },
+      { "n": "Lámpara", "p": "$53", "c": "#6c7a6a" }
+    ],
+    "cart": "Carrito",
+    "cartN": "2 productos",
+    "total": "Total",
+    "pay": "Pagar"
+  },
+  "cm": {
+    "now": "En cines",
+    "soon": "Próximamente",
+    "fav": "Favoritos",
+    "trailer": "Tráiler",
+    "tabs": ["Inicio", "Populares", "Favoritos"]
+  },
+  "expTitle": "Trayectoria",
+  "expIntro": "Experiencia profesional y formación, de la más reciente a la primera.",
+  "stackTitle": "Stack",
+  "stackIntro": "Organizado por capas, de la interfaz a los agentes, más las herramientas de IA que uso a diario.",
+  "certLabel": "Certificaciones —",
+  "certs": "Next.js, Flutter y TypeScript (Udemy) · Shadcn y React Router (DevTalles) · JavaScript y Ciberseguridad (Cisco) · Arquitectura web con Java (TalentoTech) · Cloud, Storage, IA generativa y ML (AWS) · Calidad de software (SENA)",
+  "contactTitle": "Hablemos.",
+  "contactSub": "¿Tienes un proyecto, una vacante o una idea? Escríbeme y te respondo pronto.",
+  "copy": "Copiar email",
+  "copied": "Copiado ✓",
+  "clickCopy": "clic para copiar",
+  "fName": "Nombre",
+  "fMsg": "Mensaje",
+  "send": "Enviar mensaje",
+  "sending": "Enviando…",
+  "sent": "Mensaje enviado. ¡Gracias!",
+  "sendError": "No se pudo enviar. Inténtalo de nuevo más tarde.",
+  "footer": "Diseñado y desarrollado por Carlos Arias",
+  "top": "Volver arriba"
 }

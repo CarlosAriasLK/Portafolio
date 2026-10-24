@@ -1,40 +1,73 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 
-import { Toaster } from "@/components/ui/sonner";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/dictionaries/types";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Fuente variable con eje de tamaño óptico (opsz): los titulares grandes usan el corte "display"
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
+  axes: ["opsz"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
-export const metadata: Metadata = {
-  title: "Carlos Arias | Desarrollador",
-  description: "Portafolio de Carlos Arias - Desarrollador Full Stack especializado en React, Next.js, TypeScript y Node.js",
-  icons: {
-    icon: "/programacion2.png",
-    shortcut: "/programacion2.png",
-    apple: "/programacion2.png",
-  },
-};
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
 
-export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode;}>) {
+const manrope = Manrope({
+  variable: "--font-manrope-face",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+type Params = Promise<{ lang: string }>;
+
+// Solo /es y /en existen; cualquier otro segmento responde 404
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return [{ lang: "es" }, { lang: "en" }];
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { lang } = await params;
+  const { metadata } = await getDictionary(lang as Locale);
+
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    openGraph: { title: metadata.title, description: metadata.description },
+    icons: {
+      icon: "/programacion2.png",
+      shortcut: "/programacion2.png",
+      apple: "/programacion2.png",
+    },
+  };
+}
+
+export default async function RootLayout({ children, params }: Readonly<{ children: React.ReactNode; params: Params }>) {
+  const { lang } = await params;
+
   return (
-    <>
-      <html lang="es" className="scroll-smooth">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          
-          {children}
-          <Toaster />
-
-        </body>
-      </html>
-    </>
+    // Las variables de fuente van en <html> para que --font-sans (definida en :root) pueda resolverlas
+    <html lang={lang} className={`${bricolage.variable} ${jetbrains.variable} ${instrument.variable} ${manrope.variable}`}>
+      <body>
+        {children}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}[data-word]{opacity:1!important}`}</style>
+        </noscript>
+      </body>
+    </html>
   );
 }
